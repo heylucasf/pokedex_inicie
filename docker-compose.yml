@@ -1,0 +1,50 @@
+services:
+  mysql:
+    container_name: db-pokedex
+    restart: always
+    image: mysql:latest
+    ports:
+     - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9000:9000
+    environment:
+      PMA_HOST: pokemons
+      MYSQL_ROOT_PASSWORD: root
+
+  api:
+    container_name: api-pokedex
+    build: ./api
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+    env_file:
+      - ./api/.env
+
+  spa: 
+    container_name: spa-pokedex
+    build: ./spa
+    depends_on:
+      - api
+    volumes:
+      - volume:/var/www/html
+
+  nginx: 
+    container_name: nginx-pokedex
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - volume:/var/www/html
+
+volumes:
+  volume:

@@ -1,0 +1,115 @@
+<loader-pokemon *ngIf="loader"></loader-pokemon>
+
+<header>
+    <a href="/"><img src="assets/images/logo.png" alt="logo"></a>
+</header>
+
+<div class="conteudo cor-principal" [ngStyle]="{'display': loader ? 'none' : 'block'}">
+    <h1 class="pokemon-nao-encontrado" *ngIf="!pokemon"><span class="efeito-brilho-cor-segundaria cor-segundaria">Pokémon </span>não encontrado</h1>
+    <div *ngIf="pokemon" class="conteudo-cima">
+        <div class="conteudo-detalhes">
+            <h1>{{nomePoke}}</h1>
+            <div class="conteudo-detalhes-codigo-tipo">
+                <p>Cod: #{{idPoke.toString().padStart(4, '0')}}</p>
+                <div class="conteudo-detalhes-tipo">
+                    <p>Tipo:  </p>
+                    <span 
+                        class="tipo-cor-laranja" 
+                        [ngClass]="{'cor-tipo-eletrico': tipoPoke == 'Electric', 
+                                    'cor-tipo-planta': tipoPoke == 'Grass',
+                                    'cor-tipo-agua': tipoPoke == 'Water',
+                                    'cor-tipo-inseto': tipoPoke == 'Bug',
+                                    'cor-tipo-normal': tipoPoke == 'Normal',
+                                    'cor-tipo-psiquico': tipoPoke == 'Psychic',
+                                    'cor-tipo-veneno': tipoPoke == 'Poison',
+                                    'cor-tipo-terra': tipoPoke == 'Ground',
+                                    'cor-tipo-lutador': tipoPoke == 'Fighting',
+                                    'cor-tipo-dragao': tipoPoke == 'Dragon',
+                                    'cor-tipo-fada': tipoPoke == 'Fairy',
+                                    'cor-tipo-fastasma': tipoPoke == 'Ghost',
+                                    'cor-tipo-gelo': tipoPoke == 'Ice',
+                                    'cor-tipo-rocha': tipoPoke == 'Rock',
+                                    'cor-tipo-metal': tipoPoke == 'Steel',
+                                    'cor-tipo-sombrio': tipoPoke == 'Dark'}"><p>{{tipoPoke}}</p>
+                    </span>
+                </div>
+            </div>
+            <h2 class="mb-15">Descrição</h2>
+            <p class="mb-30">"{{descPoke}}"</p>
+
+            <h2 class="mb-15">Informações</h2>
+
+            <div class="informacoes-gerais">
+                <div class="informacoes">
+                    <div class="informacoes-titulo">
+                        <p>Altura:</p>
+                    </div>
+                    <div class="informacoes-dado">
+                        <p>{{alturaPoke}}m</p>
+                    </div>
+                </div>
+    
+                <div class="informacoes">
+                    <div class="informacoes-titulo">
+                        <p>Peso:</p>
+                    </div>
+                    <div class="informacoes-dado">
+                        <p>{{pesoPoke}}kg</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="mb-15">Status</h2>
+
+            <div class="status">
+                <div class="status-texto">
+                    <p>Vida</p>
+                </div>
+                <div class="status-progress">
+                    <div class="progress-container">
+                        <div class="progress-bar-vida" [ngStyle]="{ 'width': vidaProgressBarWidth }"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status">
+                <div class="status-texto">
+                    <p>Defesa</p>
+                </div>
+                <div class="status-progress">
+                    <div class="progress-container">
+                        <div class="progress-bar-defesa" [ngStyle]="{ 'width': defesaProgressBarWidth }"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status">
+                <div class="status-texto">
+                    <p>Velocidade</p>
+                </div>
+                <div class="status-progress">
+                    <div class="progress-container">
+                        <div class="progress-bar-velocidade" [ngStyle]="{ 'width': velocidadeProgressBarWidth }"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status">
+                <div class="status-texto">
+                    <p>Ataque</p>
+                </div>
+                <div class="status-progress">
+                    <div class="progress-container">
+                        <div class="progress-bar-ataque" [ngStyle]="{ 'width': ataqueProgressBarWidth }"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="conteudo-img">
+            <div class="circulo-poke"></div>
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{idPoke}}.png" alt="pokemom">
+        </div>
+    </div>
+    <carrossel-procurados></carrossel-procurados>
+</div>

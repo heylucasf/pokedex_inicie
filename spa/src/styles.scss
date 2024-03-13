@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+    background: linear-gradient(180deg, rgba(239,244,250,255), rgba(255,255,255,255) 100%) no-repeat;
+}
+
+body, h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    font-family: "Nunito", sans-serif;
+}
+
+.cor-principal {
+    color: #2F3E77;
+}
+
+.cor-segundaria {
+    color: #EA686D;
+}
+
+.efeito-brilho-cor-segundaria {
+    text-shadow: 0px 0px 100px rgba(234,104,108,0.7);
+    // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

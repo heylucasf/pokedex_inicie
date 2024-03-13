@@ -1,0 +1,38 @@
+<div *ngFor="let poke of pokemons; let i = index">
+    <div class="carrossel-item cor-principal"
+        [ngClass]="{
+            'selected': i === selectedIndex, 
+            'prev': (i === (selectedIndex - 1 + pokemons.length) % pokemons.length), 
+            'next': (i === (selectedIndex + 1) % pokemons.length)
+        }">
+
+        <button class="carousel-btn-left" (click)="carrosselVoltar()">❮</button>
+        <button class="carousel-btn-right" (click)="carrosselProx()">❯</button>
+
+
+        <div class="carrossel-conteudo" (click)="redirectToPoke(poke.id)">
+            <div class="identificacao-pokemom">
+                <h2>{{poke.nome}}</h2>
+                <p>#{{poke.id.toString().padStart(4, '0')}}</p>
+            </div>
+
+            <div class="img-pokemom">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{poke.id}}.png" width="171" alt="pokemom">
+            </div>
+            
+            <div class="linha-pontilhada"></div>
+
+            <div class="especificacoes-pokemom">
+                <div class="especificacao-altura">
+                    <h4>Altura:</h4>
+                    <p>{{poke.altura}}m</p>
+                </div>
+        
+                <div class="especificacao-peso">
+                    <h4>Peso:</h4>
+                    <p>{{poke.peso}}kg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

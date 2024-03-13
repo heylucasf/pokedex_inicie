@@ -1,0 +1,62 @@
+<header>
+    <a href="/"><img src="assets/images/logo.png" alt="logo"></a>
+</header>
+
+<div class="conteudo cor-principal">
+    <div class="conteudo-cima">
+
+        <!-- Conteudo do inicio do Site -->
+        <div class="conteudo-esquerdo">
+            <h1>Explore o mundo dos <span class="cor-segundaria efeito-brilho-cor-segundaria">Pokémons</span></h1>
+            <p >Descubra todas as espécies de Pokémons</p>
+            <div class="input-container">
+                <input [(ngModel)]="pokeNome" type="text" class="input-custom" placeholder="">
+                <button (click)="procuraPoke()" class="btn-vermelho">Buscar</button>
+            </div>
+            <h4 *ngIf="msgPokeNaoEncontrado" class="msg-erro">{{msgPokeNaoEncontrado}}</h4>
+        </div>
+        <!-- Fim do Conteudo do inicio do Site -->
+
+        <!-- Carrossel Todos os Pokemons -->
+        <div class="conteudo-direito">
+            <carrossel-pokemons></carrossel-pokemons>
+        </div>
+        <!-- Fim Carrossel Todos os Pokemons -->
+
+    </div>
+
+    <!-- Componente Carrossel Pokemons procurados -->
+    <carrossel-procurados *ngIf="!procurandoPoke"></carrossel-procurados>
+    <!-- Fim Componente Carrossel Pokemons procurados -->
+
+    <!-- Conteúdo ao resultar a pesquisa do Pokemón -->
+    <div class="resultado-pesquisa" *ngIf="procurandoPoke">
+        <div>
+            <h2>Resultado da pesquisa:</h2>
+        </div>
+        <div class="card-pesquisa cor-principal" (click)="redirectToPoke(pokeIdEncontrado)">
+            <div class="identificacao-pokemom">
+                <h2>{{pokeNomeEncontrado}}</h2>
+                <p>#{{pokeIdEncontrado.toString().padStart(4, '0')}}</p>
+            </div>
+            <div class="img-pokemom">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{pokeIdEncontrado}}.png" width="171" alt="pokemom">
+            </div>
+        
+            <div class="linha-pontilhada"></div>
+        
+            <div class="especificacoes-pokemom">
+                <div class="especificacao-altura">
+                    <h4>Altura:</h4>
+                    <p>{{pokeAlturaEncontrado}}m</p>
+                </div>
+        
+                <div class="especificacao-peso">
+                    <h4>Peso:</h4>
+                    <p>{{pokePesoEncontrado}}kg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim do Conteúdo ao resultar a pesquisa do Pokemón -->
+</div>

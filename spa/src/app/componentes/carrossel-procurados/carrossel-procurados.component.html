@@ -1,0 +1,38 @@
+<div class="conteudo-baixo">
+    <div class="conteudo-baixo-botoes-carrossel">
+        <div>
+            <h2>{{pokemons && pokemons.length < 1 ? 'Seja o primeiro a procurar um Pokémon!' : 'Mais procurados'}}</h2>
+        </div>
+        <div *ngIf="pokemons.length > 0">
+            <button class="carousel-btn" (click)="prevSlide()">❮</button>
+            <button class="carousel-btn" (click)="nextSlide()">❯</button>
+        </div>
+    </div>
+    <div class="carrousel-baixo">
+        <div class="mr-10" *ngFor="let poke of pokemons">
+            <div class="bloco-carrossel cor-principal" (click)="redirectToPoke(poke.poke_id)">
+                <div class="identificacao-pokemom">
+                    <h2>{{poke.poke_nome}}</h2>
+                    <p>#{{poke.poke_id.toString().padStart(4, '0')}}</p>
+                </div>
+                <div class="img-pokemom">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{poke.poke_id}}.png" width="171" alt="pokemom">
+                </div>
+            
+                <div class="linha-pontilhada"></div>
+            
+                <div class="especificacoes-pokemom">
+                    <div class="especificacao-altura">
+                        <h4>Altura:</h4>
+                        <p>{{poke.poke_altura}}m</p>
+                    </div>
+            
+                    <div class="especificacao-peso">
+                        <h4>Peso:</h4>
+                        <p>{{poke.poke_peso}}kg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

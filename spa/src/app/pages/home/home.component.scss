@@ -1,0 +1,169 @@
+header img {
+    margin-top: 7vh;
+    margin-left: 10vh;
+    max-width: 110px;
+    max-height: 138px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.conteudo {
+    margin: 30px 60px 0 60px;
+    display: flex;
+    flex-direction: column;
+
+    .conteudo-cima {
+        display: flex;
+    
+        .conteudo-esquerdo {
+            flex: 1;
+
+            .msg-erro {
+                margin-top: 10px;
+                color: #EA686D;
+            }
+        }
+    
+        .conteudo-esquerdo h1 {
+            font-size: 55px;
+        }
+
+        .conteudo-esquerdo p {
+            font-size: 25px;
+            margin-top: 25px;
+        }
+
+        .conteudo-direito {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+    }
+
+    .input-custom {
+        border: none;
+        background-color: #fff;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px 0 0 5px;
+        box-sizing: border-box;
+        color: #333;
+    }
+    
+    .btn-vermelho {
+        background-color: #EA686D;;
+        color: #fff;
+        border: none;
+        padding: 8px 15px 8px 15px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        box-shadow: 0px 0px 20px rgba(234,104,108,1);
+        font-size: 22px;
+    }
+    
+    .btn-vermelho:hover {
+        scale: 1.01;
+    }
+
+    .btn-vermelho:active {
+        scale: 1;
+    }
+
+    .input-container {
+        margin-top: 30px;
+        display: flex;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .resultado-pesquisa {
+        margin: 15vh 0px 30px 0px;
+    
+        .card-pesquisa {
+            margin-top: 30px;
+            background: #fff;
+            width: 267px;
+            height: 321px;
+            border-radius: 5px;
+            box-shadow: 0px 20px 20px rgba(47, 62, 119, 0.07);
+            overflow: hidden;
+            cursor: pointer;
+    
+            .img-pokemom {
+                display: flex;
+                justify-content: center;
+    
+                .img-pokemom img {
+                    max-width: 171px;
+                }
+            }
+    
+            .identificacao-pokemom {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px 20px 5px 20px;
+            }
+    
+            .especificacoes-pokemom {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: space-between;
+                padding: 4px 20px 20px 20px;
+    
+                .especificacoes-pokemom h4 {
+                    margin-bottom: 5px;
+                }
+    
+                .especificacao-altura{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+        
+                .especificacao-peso{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+    
+    
+            .linha-pontilhada {
+                border: none;
+                border-top: 2px dotted #EFF4FA;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    
+        .card-pesquisa:hover{
+            scale: 1.01;
+        }
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .conteudo-cima {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .conteudo-direito {
+        margin: 5vh 0 30vh 0;
+    }
+
+    .resultado-pesquisa {
+        margin: 15% 0 30px 0;
+    }
+}

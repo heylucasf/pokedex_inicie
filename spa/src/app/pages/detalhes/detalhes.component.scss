@@ -1,0 +1,248 @@
+header img {
+    margin-top: 7vh;
+    margin-left: 10vh;
+    max-width: 110px;
+    max-height: 138px;
+}
+
+.conteudo {
+    margin: 30px 76px 0 76px;
+    display: flex;
+    flex-direction: column;
+
+    .pokemon-nao-encontrado {
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 22px;
+    }
+
+    .conteudo-cima {
+        display: flex;
+
+        .conteudo-detalhes{
+            flex: 1;
+
+            .informacoes-gerais {
+                margin: 0px 0 40px 0;
+
+                .informacoes{
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .conteudo-detalhes-codigo-tipo{
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+
+            .status {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+
+                .progress-container {
+                    width: 200px;
+                    height: 21px;
+                    background-color: #FBFDFF;
+                    border-radius: 2px;
+                    overflow: hidden;
+                }
+
+                .status-texto {
+                    width: 125px;
+                }
+            }
+        }
+
+        .conteudo-detalhes-tipo {
+            margin-top: 20px;
+            display: flex;
+        }
+
+        .conteudo-detalhes-tipo span p {
+            color: #fff;
+        }
+
+        .conteudo-img {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .conteudo-img img {
+            z-index: 1;
+            max-width: 450px;
+            max-height: 450px;
+        }
+
+        .conteudo-img img:hover {
+            scale: 1.05;
+        }
+    }
+}
+
+.tipo-cor-laranja {
+    background-color: #FFAA50;
+    display: block;
+    width: 100px;
+    height: 30px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.circulo-poke {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 50%;
+    top: 16%;
+  }
+
+.progress-bar-vida {
+    height: 100%;
+    background-color: #C4F789;
+    border-radius: 2px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar-defesa {
+    height: 100%;
+    background-color: #F7802A;
+    border-radius: 2px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar-ataque {
+    height: 100%;
+    background-color: #EA686D;
+    border-radius: 2px;
+    transition: width 0.5s ease-in-out;
+}
+
+.progress-bar-velocidade {
+    height: 100%;
+    background-color: #49D0B0;
+    border-radius: 2px;
+    transition: width 0.5s ease-in-out;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.cor-tipo-planta {
+    background-color: #64BC58;
+}
+
+.cor-tipo-eletrico {
+    background-color: #F3D33D;
+}
+
+.cor-tipo-agua {
+    background-color: #5499D8;
+}
+
+.cor-tipo-inseto {
+    background-color: #98C83A;
+}
+
+.cor-tipo-normal {
+    background-color: #919AA1;
+}
+
+.cor-tipo-psiquico {
+    background-color: #F86D73;
+}
+
+.cor-tipo-veneno {
+    background-color: #A566C6;
+}
+
+.cor-tipo-terra {
+    background-color: #DA7847;
+}
+
+.cor-tipo-lutador {
+    background-color: #CF4069;
+}
+
+.cor-tipo-dragao {
+    background-color: #0C6AC1;
+}
+
+.cor-tipo-fada {
+    background-color: #EC8DE4;
+}
+
+.cor-tipo-fastasma {
+    background-color: #556AAF;
+}
+
+.cor-tipo-gelo {
+    background-color: #75CFC2;
+}
+
+.cor-tipo-rocha {
+    background-color: #C6B98B;
+}
+
+.cor-tipo-metal {
+    background-color: #538B9D;
+}
+
+.cor-tipo-sombrio {
+    background-color: #676276;
+}
+
+@media screen and (max-width: 1100px) {
+    .conteudo-cima {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .conteudo-img {
+        margin-top: 50px;
+    }
+
+    .circulo-poke{
+        top: 73%
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .circulo-poke{
+        top: 77%
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .circulo-poke{
+        top: 80%
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .circulo-poke{
+        top: 87%
+    }
+}
