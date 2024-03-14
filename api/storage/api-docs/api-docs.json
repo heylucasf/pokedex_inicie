@@ -1,0 +1,319 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pokemons",
+        "description": "Swagger Doc da API de Pokemons",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/pokedex": {
+            "get": {
+                "tags": [
+                    "Pokemons"
+                ],
+                "summary": "Listar todos Pokemons",
+                "description": "Retorna todos os Pokemons",
+                "operationId": "obterPokemons",
+                "responses": {
+                    "200": {
+                        "description": "sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "poke_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "poke_nome": {
+                                                "type": "string",
+                                                "example": "Bulbasaur"
+                                            },
+                                            "poke_peso": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": "6.9"
+                                            },
+                                            "poke_altura": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": "0.7"
+                                            },
+                                            "poke_descricao": {
+                                                "type": "string",
+                                                "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+                                            },
+                                            "poke_procurado": {
+                                                "type": "integer",
+                                                "example": "0"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Nenhum Pokemon encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Nenhum Pokemon encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pokedex/procuraPoke/{pokeNome}": {
+            "get": {
+                "tags": [
+                    "Pokemons"
+                ],
+                "summary": "Procurar um Pokemon pelo nome",
+                "description": "Retorna o Pokemon informado",
+                "operationId": "searchPokemonByName",
+                "parameters": [
+                    {
+                        "name": "pokeNome",
+                        "in": "path",
+                        "description": "Nome do Pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "poke_id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "poke_nome": {
+                                            "type": "string",
+                                            "example": "Bulbasaur"
+                                        },
+                                        "poke_peso": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "6.9"
+                                        },
+                                        "poke_altura": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "0.7"
+                                        },
+                                        "poke_descricao": {
+                                            "type": "string",
+                                            "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+                                        },
+                                        "poke_procurado": {
+                                            "type": "integer",
+                                            "example": "10"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pokemon não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pokemon não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pokedex/maisProcurados": {
+            "get": {
+                "tags": [
+                    "Pokemons"
+                ],
+                "summary": "Top 10 Pokemons mais procurados",
+                "description": "Retorna uma lista dos 10 Pokemons mais procurados.",
+                "operationId": "obtemPokemonsMaisProcurados",
+                "responses": {
+                    "200": {
+                        "description": "sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "poke_id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "poke_nome": {
+                                                "type": "string",
+                                                "example": "Bulbasaur"
+                                            },
+                                            "poke_peso": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": "6.9"
+                                            },
+                                            "poke_altura": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": "0.7"
+                                            },
+                                            "poke_descricao": {
+                                                "type": "string",
+                                                "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+                                            },
+                                            "poke_procurado": {
+                                                "type": "integer",
+                                                "example": "100"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Nenhum Pokemon encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Nenhum Pokemon encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/pokedex/{id}": {
+            "get": {
+                "tags": [
+                    "Pokemons"
+                ],
+                "summary": "Detalhes do Pokemon",
+                "description": "Retorna os detalhes do Pokemon",
+                "operationId": "getPokemonDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Pokemon",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "nome": {
+                                            "type": "string",
+                                            "example": "Bulbasaur"
+                                        },
+                                        "tipo": {
+                                            "type": "string",
+                                            "example": "Grass"
+                                        },
+                                        "vida": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "ataque": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
+                                        "defesa": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
+                                        "velocidade": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "peso": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "6.9"
+                                        },
+                                        "altura": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": "0.7"
+                                        },
+                                        "descricao": {
+                                            "type": "string",
+                                            "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pokémon não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pokémon não encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

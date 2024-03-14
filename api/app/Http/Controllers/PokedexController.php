@@ -24,8 +24,39 @@ class PokedexController extends Controller {
         return $desc['flavor_text_entries'][44]['flavor_text'];
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/pokedex",
+     *      operationId="obterPokemons",
+     *      tags={"Pokemons"},
+     *      summary="Listar todos Pokemons",
+     *      description="Retorna todos os Pokemons",
+     *      @OA\Response(
+     *          response=200,
+     *          description="sucesso",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(
+     *                  @OA\Property(property="poke_id", type="integer", example="1"),
+     *                  @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
+     *                  @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
+     *                  @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *                  @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
+     *                  @OA\Property(property="poke_procurado", type="integer", example="0")
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Nenhum Pokemon encontrado",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Nenhum Pokemon encontrado")
+     *          )
+     *      )
+     * )
+     */
     public function index() {
-        $pokes = collect(range(1, 10))->map(function ($id) {
+        $pokes = collect(range(1, 20))->map(function ($id) {
             if (!Pokemons::where('poke_id', $id)->exists()) {
                 $pokesList = $this->getPokemons($id);
                 $pokeDesc = $this->getPokemonDesc($id);
@@ -53,11 +84,43 @@ class PokedexController extends Controller {
         }
     }
 
-    public function maisProcurados() {
-        $pokes = Pokemons::orderBy('poke_procurado', 'DESC')->get();
-        return response()->json($pokes);
-    }
-
+    /**
+     * @OA\Get(
+     *      path="/api/pokedex/procuraPoke/{pokeNome}",
+     *      operationId="searchPokemonByName",
+     *      tags={"Pokemons"},
+     *      summary="Procurar um Pokemon pelo nome",
+     *      description="Retorna o Pokemon informado",
+     *      @OA\Parameter(
+     *          name="pokeNome",
+     *          in="path",
+     *          required=true,
+     *          description="Nome do Pokemon",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="sucesso",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="poke_id", type="integer", example="1"),
+     *              @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
+     *              @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
+     *              @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *              @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
+     *              @OA\Property(property="poke_procurado", type="integer", example="10")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Pokemon não encontrado",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Pokemon não encontrado")
+     *          )
+     *      )
+     * )
+     */
     public function procuraPoke($pokeNome) {
         $pokeDB = Pokemons::where('poke_nome', $pokeNome)->first();
 
@@ -70,15 +133,86 @@ class PokedexController extends Controller {
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Get(
+     *      path="/api/pokedex/maisProcurados",
+     *      operationId="obtemPokemonsMaisProcurados",
+     *      tags={"Pokemons"},
+     *      summary="Top 10 Pokemons mais procurados",
+     *      description="Retorna uma lista dos 10 Pokemons mais procurados.",
+     *      @OA\Response(
+     *          response=200,
+     *          description="sucesso",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(
+     *                  @OA\Property(property="poke_id", type="integer", example="1"),
+     *                  @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
+     *                  @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
+     *                  @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *                  @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
+     *                  @OA\Property(property="poke_procurado", type="integer", example="100")
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Nenhum Pokemon encontrado",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Nenhum Pokemon encontrado")
+     *          )
+     *      )
+     * )
      */
-    public function store(Request $request)
-    {
-        //
+    public function maisProcurados() {
+        $pokes = Pokemons::where('poke_procurado', '>', 0)
+            ->orderBy('poke_procurado', 'DESC')
+            ->take(10)
+            ->get();
+
+        return response()->json($pokes);
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="/api/pokedex/{id}",
+     *      operationId="getPokemonDetails",
+     *      tags={"Pokemons"},
+     *      summary="Detalhes do Pokemon",
+     *      description="Retorna os detalhes do Pokemon",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="ID do Pokemon",
+     *          @OA\Schema(
+     *              type="integer",
+     *              format="int64"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="sucesso",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="id", type="integer", example="1"),
+     *              @OA\Property(property="nome", type="string", example="Bulbasaur"),
+     *              @OA\Property(property="tipo", type="string", example="Grass"),
+     *              @OA\Property(property="vida", type="integer", example="45"),
+     *              @OA\Property(property="ataque", type="integer", example="49"),
+     *              @OA\Property(property="defesa", type="integer", example="49"),
+     *              @OA\Property(property="velocidade", type="integer", example="45"),
+     *              @OA\Property(property="peso", type="number", format="float", example="6.9"),
+     *              @OA\Property(property="altura", type="number", format="float", example="0.7"),
+     *              @OA\Property(property="descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Pokémon não encontrado",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="message", type="string", example="Pokémon não encontrado")
+     *          )
+     *      )
+     * )
      */
     public function show($id){
         $pokes = $this->getPokemons($id);
@@ -86,8 +220,8 @@ class PokedexController extends Controller {
 
         $detalhes = [
             'id' => $pokes['id'],
-            'nome' => $pokes['name'],
-            'tipo' => $pokes['types'][0]['type']['name'],
+            'nome' => ucfirst($pokes['name']),
+            'tipo' => ucfirst($pokes['types'][0]['type']['name']),
             'vida' => $pokes['stats'][0]['base_stat'],
             'ataque' => $pokes['stats'][1]['base_stat'],
             'defesa' => $pokes['stats'][2]['base_stat'],
@@ -98,21 +232,5 @@ class PokedexController extends Controller {
         ];
 
         return $detalhes;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
