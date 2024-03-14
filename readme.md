@@ -35,9 +35,11 @@ A Spa como é dependente Nginx, ela cria um volume obtido pelo Dist gerado pelo 
 Para executar o projeto basta ter o [Docker](https://docs.docker.com/get-docker/) instalado na sua máquina.
 Após ter o Docker, clone o projeto pelo respositório [GIT](https://github.com/heylucasf/pokedex_inicie) e coloque em uma pasta da sua escolha.
 
-Antes de executar o projeto, altere o o ```DB_HOST``` do ```.env``` da api
-> ```DB_HOST=mysql``` //Pega o container onde está o banco de dados
->
+Antes de executar o projeto, altere o os parâmetros de Banco do ```.env``` da api
+> ```DB_HOST=mysql``` // Pega o container onde está o banco de dados
+> ```DB_DATABASE=pokemons``` // Nome do Banco de dados
+> ```DB_USERNAME=root```
+> ```DB_PASSWORD=root```
 
 Depois de clonado abra algum terminal que execute o Docker, entre no local raiz do projeto clonado e execute os comandos:
 > ```docker compose up -d``` //Cria as imagens e sobe os containers em segundo plano
