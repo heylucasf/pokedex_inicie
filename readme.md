@@ -1,8 +1,7 @@
-<p align="center"><a href="https://inicie.digital/" target="_blank"><img src="https://attachments.gupy.io/production/companies/24820/career/54823/images/2024-01-04_14-13_companyLogoUrl.png" width="400" alt="Inicie Logo"></a></p>
+<p align="center"><a href="https://inicie.digital/" target="_blank"><img src="https://attachments.gupy.io/production/companies/24820/career/54823/images/2024-01-04_14-13_companyLogoUrl.png" width="150" alt="Inicie Logo"></a></p>
 
-https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png
 
-<p align="center"><img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" width="400" alt="logo Pokedex"></p>
+<p align="center"><img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" width="200" alt="logo Pokedex"></p>
 
 # Sobre o Projeto
 
@@ -15,7 +14,7 @@ O projeto foi contruido em Angular 17, Laravel 10, MySql e Docker.
 A API tem finalidade de executar operações e obter dados requisitados pelo cliente. 
 
 A API também contém conta com documentação do Swagger.
-Para entrar no Swagger basta subir a aplicação (que será falado logo abaixo na sessão do Docker) e entrar no endpoint api/doc
+Para entrar no Swagger basta subir a aplicação (que será falado logo abaixo na sessão do Docker) e entrar no endpoint ```api/doc```
 
 A finalidade da API é retornar dados da API pokeapi.co, obter os dados requisitados, armazenar apenas o necessário e disponibilizar para o SPA (front-end em Angular)
 
@@ -23,7 +22,7 @@ A finalidade da API é retornar dados da API pokeapi.co, obter os dados requisit
 ## Sobre o SPA
 **SPA criado para teste na Inicie**
 
-O SPA foi contruido em Angular 17. Ele tem a finalidade de absorver os dados da API e montar uma Pokedex com as informações.
+A SPA foi contruido em Angular 17. Ele tem a finalidade de absorver os dados da API e montar uma Pokedex com as informações.
 
 ## Docker - Estruturação do projeto
 
@@ -32,7 +31,7 @@ Ao executar o ```docker compose``` todos sobem sequencialmente planejados.
 
 A estrutura conta com as imagens da Api, Spa, MySQL, phpMyAdmin e Nginx.
 
-A Spa como é dependente Nginx. Ela cria um volume obtido pelo Dist gerado pelo Angular, o Nginx obtem esse volume e executa a Spa. O container da Spa nunca irá subir, apenas a imagem.
+A Spa como é dependente Nginx, ela cria um volume obtido pelo Dist gerado pelo Angular. O Nginx obtem esse volume e executa a Spa. O container da Spa nunca irá subir, apenas a imagem.
 
 ## Docker - Como executar
 
@@ -42,7 +41,7 @@ Após ter o Docker, clone o projeto pelo respositório [GIT](https://github.com/
 Depois de clonado abra algum terminal que execute o Docker, entre no local raiz do projeto clonado e execute os comandos:
 > ```docker compose up -d``` //Cria as imagens e sobe os containers em segundo plano
 >
-> ```docker compose exec api php artisan migrate``` // Vai pedir para criar o Banco de dados Pokemons, de sim. Com isso ele cria o banco.
+> ```docker compose exec api php artisan migrate``` // Vai pedir para criar o Banco de dados Pokemons. Dê sim, com isso ele cria o banco.
 >
 
 Depois do Banco de dados criado voce já tem acesso a aplicação nos links abaixo:
