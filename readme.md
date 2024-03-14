@@ -37,9 +37,13 @@ Após ter o Docker, clone o projeto pelo respositório [GIT](https://github.com/
 
 Antes de executar o projeto, altere o os parâmetros de Banco do ```.env``` da api
 > ```DB_HOST=mysql``` // Pega o container onde está o banco de dados
+>
 > ```DB_DATABASE=pokemons``` // Nome do Banco de dados
+>
 > ```DB_USERNAME=root```
+>
 > ```DB_PASSWORD=root```
+>
 
 Depois de clonado abra algum terminal que execute o Docker, entre no local raiz do projeto clonado e execute os comandos:
 > ```docker compose up -d``` //Cria as imagens e sobe os containers em segundo plano
