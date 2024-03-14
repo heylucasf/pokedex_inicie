@@ -10,14 +10,14 @@
         <button class="carousel-btn-right" (click)="carrosselProx()">❯</button>
 
 
-        <div class="carrossel-conteudo" (click)="redirectToPoke(poke.id)">
+        <div class="carrossel-conteudo" (click)="redirectToPoke(poke.poke_nome)">
             <div class="identificacao-pokemom">
-                <h2>{{poke.nome}}</h2>
-                <p>#{{poke.id.toString().padStart(4, '0')}}</p>
+                <h2>{{poke.poke_nome.charAt(0).toUpperCase() + poke.poke_nome.slice(1)}}</h2>
+                <p>#{{poke.poke_id.toString().padStart(4, '0')}}</p>
             </div>
 
             <div class="img-pokemom">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{poke.id}}.png" width="171" alt="pokemom">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{poke.poke_id}}.png" width="171" alt="pokemom">
             </div>
             
             <div class="linha-pontilhada"></div>
@@ -25,12 +25,12 @@
             <div class="especificacoes-pokemom">
                 <div class="especificacao-altura">
                     <h4>Altura:</h4>
-                    <p>{{poke.altura}}m</p>
+                    <p>{{poke.poke_altura}}m</p>
                 </div>
         
                 <div class="especificacao-peso">
                     <h4>Peso:</h4>
-                    <p>{{poke.peso}}kg</p>
+                    <p>{{poke.poke_peso}}kg</p>
                 </div>
             </div>
         </div>

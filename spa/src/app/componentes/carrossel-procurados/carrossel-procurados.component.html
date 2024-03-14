@@ -10,9 +10,9 @@
     </div>
     <div class="carrousel-baixo">
         <div class="mr-10" *ngFor="let poke of pokemons">
-            <div class="bloco-carrossel cor-principal" (click)="redirectToPoke(poke.poke_id)">
+            <div class="bloco-carrossel cor-principal" (click)="redirectToPoke(poke.poke_nome)">
                 <div class="identificacao-pokemom">
-                    <h2>{{poke.poke_nome}}</h2>
+                    <h2>{{poke.poke_nome.charAt(0).toUpperCase() + poke.poke_nome.slice(1)}}</h2>
                     <p>#{{poke.poke_id.toString().padStart(4, '0')}}</p>
                 </div>
                 <div class="img-pokemom">

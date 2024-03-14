@@ -38,10 +38,10 @@ export class HomeComponent {
 
     procuraPoke() {
       this.service.getProcurarPoke(this.pokeNome.toLowerCase()).subscribe((data) => {
-        this.pokeIdEncontrado = data.id
-        this.pokeNomeEncontrado = data.nome
-        this.pokeAlturaEncontrado = data.altura
-        this.pokePesoEncontrado = data.peso
+        this.pokeIdEncontrado = data.poke_id
+        this.pokeNomeEncontrado = data.poke_nome
+        this.pokeAlturaEncontrado = data.poke_altura
+        this.pokePesoEncontrado = data.poke_peso
         this.procurandoPoke = true;
         this.msgPokeNaoEncontrado = ''
       }, () => {

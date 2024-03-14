@@ -25,22 +25,31 @@ class PokedexController extends Controller {
     }
 
     public function index() {
-        $pokes = collect(range(1, 20))
-            ->map(function ($id) {
+        $pokes = collect(range(1, 10))->map(function ($id) {
+            if (!Pokemons::where('poke_id', $id)->exists()) {
                 $pokesList = $this->getPokemons($id);
+                $pokeDesc = $this->getPokemonDesc($id);
 
                 return [
-                    'id' => $pokesList['id'],
-                    'nome' => ucfirst($pokesList['name']),
-                    'peso' => $pokesList['weight'] / 10.0,
-                    'altura' => $pokesList['height'] / 10.0
+                    'poke_id' => $pokesList['id'],
+                    'poke_nome' => $pokesList['name'],
+                    'poke_peso' => $pokesList['weight'] / 10.0,
+                    'poke_altura' => $pokesList['height'] / 10.0,
+                    'poke_descricao' => $pokeDesc,
+                    'poke_procurado' => 0
                 ];
-        });
+            }
+            return null;
+        })->filter();
 
-        if($pokes) {
-            return response()->json($pokes);
+        if (!$pokes->isEmpty()) {
+            Pokemons::insert($pokes->toArray());
+        }
+
+        if($pokeDB = Pokemons::all()->toArray()) {
+            return response()->json($pokeDB);
         } else {
-            return response()->json(['message' => 'Erro ao carregar pokemons'], 404);
+            return response()->json(['message' => 'Nenhum Pokemón encontrado'], 404);
         }
     }
 
@@ -50,33 +59,13 @@ class PokedexController extends Controller {
     }
 
     public function procuraPoke($pokeNome) {
-        $poke = $this->getPokemons($pokeNome);
+        $pokeDB = Pokemons::where('poke_nome', $pokeNome)->first();
 
-        if ($poke) {
-            $pokeDB = Pokemons::where('poke_nome', $poke['name'])->first();
-
-            if (!$pokeDB) {
-                $pokeDB = new Pokemons;
-                $pokeDB->poke_id = $poke['id'];
-                $pokeDB->poke_nome = ucfirst($poke['name']);
-                $pokeDB->poke_peso = $poke['weight'] / 10.0;
-                $pokeDB->poke_altura = $poke['height'] / 10.0;
-                $pokeDB->poke_procurado = 1;
-            } else {
-                $pokeDB->poke_procurado++;
-            }
-
-            $pokeDB->save();
-
-            return [
-                'id' => $poke['id'],
-                'nome' => ucfirst($poke['name']),
-                'peso' => $poke['weight'] / 10,
-                'altura' => $poke['height'] / 10.0,
-                'procurado' => $pokeDB->poke_procurado,
-            ];
+        if ($pokeDB) {
+            $pokeDB->increment('poke_procurado');
+            return $pokeDB;
         } else {
-            return response()->json(['message' => 'Pokémon não encontrado'], 404);
+            return response()->json(['message' => 'Nome do Pokemón não encontrado'], 404);
         }
     }
 
@@ -97,8 +86,8 @@ class PokedexController extends Controller {
 
         $detalhes = [
             'id' => $pokes['id'],
-            'nome' => ucfirst($pokes['name']),
-            'tipo' => ucfirst($pokes['types'][0]['type']['name']),
+            'nome' => $pokes['name'],
+            'tipo' => $pokes['types'][0]['type']['name'],
             'vida' => $pokes['stats'][0]['base_stat'],
             'ataque' => $pokes['stats'][1]['base_stat'],
             'defesa' => $pokes['stats'][2]['base_stat'],

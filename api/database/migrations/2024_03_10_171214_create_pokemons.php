@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('poke_nome');
             $table->integer('poke_peso');
             $table->string('poke_altura');
+            $table->string('poke_descricao');
             $table->integer('poke_procurado');
-            $table->timestamps();
         });
     }
 
