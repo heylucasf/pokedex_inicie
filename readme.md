@@ -48,7 +48,7 @@ Antes de executar o projeto, altere o os parâmetros de Banco do ```.env``` da `
 Depois de clonado abra algum terminal que execute o Docker, entre no local raiz do projeto clonado e execute os comandos:
 > ```docker compose up -d``` //Cria as imagens e sobe os containers em segundo plano
 >
-> ```docker compose exec api php artisan migrate``` // Vai pedir para criar o Banco de dados Pokemons. Dê sim, com isso ele cria o banco.
+> ```docker compose exec api php artisan migrate``` // Vai pedir para criar o Banco de dados Pokemons. Dê sim, com isso ele cria o banco. Caso de erro espere um pouco e tente novamente.
 >
 
 Depois do Banco de dados criado voce já tem acesso a aplicação nos links abaixo:
