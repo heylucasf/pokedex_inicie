@@ -1,7 +1,4 @@
-<p align="center"><a href="https://inicie.digital/" target="_blank"><img src="https://attachments.gupy.io/production/companies/24820/career/54823/images/2024-01-04_14-13_companyLogoUrl.png" width="150" alt="Inicie Logo"></a></p>
-
-
-<p align="center"><img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" width="200" alt="logo Pokedex"></p>
+<p align="center"><a href="https://inicie.digital/" target="_blank"><img src="https://attachments.gupy.io/production/companies/24820/career/54823/images/2024-01-04_14-13_companyLogoUrl.png" width="150" alt="Inicie Logo"></a></p><p align="center"><img src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png" width="400" alt="logo Pokedex"></p>
 
 # Sobre o Projeto
 
