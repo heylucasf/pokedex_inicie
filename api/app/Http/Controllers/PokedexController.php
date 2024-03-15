@@ -231,6 +231,6 @@ class PokedexController extends Controller {
             'descricao' => $pokesDescricao,
         ];
 
-        return $detalhes;
+        return response()->json($detalhes);
     }
 }
