@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-algo-deu-errado',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './algo-deu-errado.component.html',
   styleUrl: './algo-deu-errado.component.scss'
 })

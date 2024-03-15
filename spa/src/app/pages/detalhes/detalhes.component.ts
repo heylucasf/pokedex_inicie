@@ -50,19 +50,17 @@ export class DetalhesComponent implements OnInit{
   getPokemonDetails(identifier: string): void {
     this.service.getPokemonByIdentifier(identifier).subscribe((data) => {
         this.pokemon = data;
-        this.ataquePoke = data.ataque;
-        this.defesaPoke = data.defesa;
-        this.descPoke = data.descricao;
-        this.idPoke = data.id;
-        this.nomePoke = data.nome;
-        this.tipoPoke = data.tipo;
-        this.alturaPoke = data.altura;
-        this.pesoPoke = data.peso;
+        this.descPoke = data.poke_descricao;
+        this.idPoke = data.poke_id;
+        this.nomePoke = data.poke_nome;
+        this.tipoPoke = data.poke_tipo;
+        this.alturaPoke = data.poke_altura;
+        this.pesoPoke = data.poke_peso;
 
-        this.vidaProgressBarWidth = data.vida + '%';
-        this.ataqueProgressBarWidth = data.ataque + '%';
-        this.defesaProgressBarWidth = data.defesa + '%';
-        this.velocidadeProgressBarWidth = data.velocidade + '%';
+        this.vidaProgressBarWidth = data.poke_vida + '%';
+        this.ataqueProgressBarWidth = data.poke_ataque + '%';
+        this.defesaProgressBarWidth = data.poke_defesa + '%';
+        this.velocidadeProgressBarWidth = data.poke_velocidade + '%';
         this.loader = false;
       }, error => {
           this.router.navigate(['algo-deu-errado', {status: error.status}])

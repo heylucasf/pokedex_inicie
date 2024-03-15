@@ -23,7 +23,7 @@ import { CarrosselPokemonsComponent } from "../../componentes/carrossel-pokemons
 export class HomeComponent {
     
     procurandoPoke = false;
-    pokeNome = 'a';
+    pokeNome = '';
     pokeIdEncontrado!: number;
     pokeNomeEncontrado = '';
     pokeAlturaEncontrado = '';

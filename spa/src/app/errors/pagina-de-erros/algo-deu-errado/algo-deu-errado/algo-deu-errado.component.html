@@ -4,7 +4,7 @@
             <h3>{{status}}</h3>
         </div>
         <div class="msg">
-            <h1>Desculpe, algo deu errado</h1>
+            <h1>{{status == 404 ? 'Pokemon não encontrado' : 'Desculpe, algo deu errado'}}</h1>
         </div>
     </div>
     <div class="bloco-2">
