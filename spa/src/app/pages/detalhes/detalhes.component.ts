@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { CarrosselProcuradosComponent } from "../../componentes/carrossel-procurados/carrossel-procurados.component";
@@ -35,6 +35,7 @@ export class DetalhesComponent implements OnInit{
   constructor(
     private service: ApiService,
     private route: ActivatedRoute,
+    private router: Router,
     private title: Title
     )
   {}
@@ -47,8 +48,7 @@ export class DetalhesComponent implements OnInit{
   }
 
   getPokemonDetails(identifier: string): void {
-    this.service.getPokemonByIdentifier(identifier).subscribe(
-      (data) => {
+    this.service.getPokemonByIdentifier(identifier).subscribe((data) => {
         this.pokemon = data;
         this.ataquePoke = data.ataque;
         this.defesaPoke = data.defesa;
@@ -64,6 +64,8 @@ export class DetalhesComponent implements OnInit{
         this.defesaProgressBarWidth = data.defesa + '%';
         this.velocidadeProgressBarWidth = data.velocidade + '%';
         this.loader = false;
+      }, error => {
+          this.router.navigate(['algo-deu-errado', {status: error.status}])
       }
     );
   }

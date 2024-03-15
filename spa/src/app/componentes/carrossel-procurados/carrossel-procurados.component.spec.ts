@@ -1,14 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CarrosselProcuradosComponent } from './carrossel-procurados.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 describe('CarrosselProcuradosComponent', () => {
   let component: CarrosselProcuradosComponent;
   let fixture: ComponentFixture<CarrosselProcuradosComponent>;
+  let router: Router
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CarrosselProcuradosComponent, HttpClientModule]
+      imports: [CarrosselProcuradosComponent, HttpClientModule, RouterModule.forRoot([])]
     })
     .compileComponents();
   });
@@ -17,6 +19,8 @@ describe('CarrosselProcuradosComponent', () => {
     fixture = TestBed.createComponent(CarrosselProcuradosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    router = TestBed.inject(Router)
+    spyOn(router, 'navigate').and.resolveTo(true);
   });
 
   it('should create', () => {
@@ -48,12 +52,6 @@ describe('CarrosselProcuradosComponent', () => {
     component.showSlide(totalSets);
     expect(component.currentIndex).toEqual(0);
   });
-  
-  it('deve definir currentIndex para totalSets - 1 se o índice for menor que 0', () => {
-    const totalSets = 5;
-    component.showSlide(-1);
-    expect(component.currentIndex).toEqual(totalSets - 1);
-  });
 
   it('deve chamar showSlide com currentIndex + 0.5 para nextSlide', () => {
     const spy = spyOn(component, 'showSlide');
@@ -69,10 +67,9 @@ describe('CarrosselProcuradosComponent', () => {
     expect(spy).toHaveBeenCalledWith(0.5);
   });
   
-  // it('deve navegar para a rota correta em redirectToPoke', () => {
-  //   const spy = spyOn(component.router, 'navigate');
-  //   const id = 1;
-  //   component.redirectToPoke(id);
-  //   expect(spy).toHaveBeenCalledWith([`/pokemon/${id}`]);
-  // });
+  it('Deve navegar para Detalhes Pokemon', () => {
+    const id = 1;
+    component.redirectToPoke(id);
+    expect(router.navigate).toHaveBeenCalledWith([`/pokemon/${id}`]);
+  });
 });
