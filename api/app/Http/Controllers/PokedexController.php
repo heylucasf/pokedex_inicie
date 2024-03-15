@@ -67,6 +67,11 @@ class PokedexController extends Controller {
                     'poke_peso' => $pokesList['weight'] / 10.0,
                     'poke_altura' => $pokesList['height'] / 10.0,
                     'poke_descricao' => $pokeDesc,
+                    'poke_tipo' => ucfirst($pokesList['types'][0]['type']['name']),
+                    'poke_vida' => $pokesList['stats'][0]['base_stat'],
+                    'poke_ataque' => $pokesList['stats'][1]['base_stat'],
+                    'poke_defesa' => $pokesList['stats'][2]['base_stat'],
+                    'poke_velocidade' => $pokesList['stats'][5]['base_stat'],
                     'poke_procurado' => 0
                 ];
             }
@@ -80,7 +85,7 @@ class PokedexController extends Controller {
         if($pokeDB = Pokemons::all()->toArray()) {
             return response()->json($pokeDB);
         } else {
-            return response()->json(['message' => 'Nenhum Pokemón encontrado'], 404);
+            return response()->json(['message' => 'Nenhum Pokemón encontrado'], 204);
         }
     }
 
@@ -169,7 +174,12 @@ class PokedexController extends Controller {
             ->take(10)
             ->get();
 
-        return response()->json($pokes);
+        if($pokes) {
+            return response()->json($pokes);
+        } else {
+            return response()->json(['message' => 'Não há nenhum Pokemon no TOP 10'], 204);
+        }
+
     }
 
     /**
@@ -214,23 +224,17 @@ class PokedexController extends Controller {
      *      )
      * )
      */
-    public function show($id){
-        $pokes = $this->getPokemons($id);
-        $pokesDescricao = $this->getPokemonDesc($id);
+    public function show($param){
+        if (is_numeric($param)) {
+            $poke_param = Pokemons::where('poke_id', $param)->first();
+        } else {
+            $poke_param = Pokemons::where('poke_nome', $param)->first();
+        }
 
-        $detalhes = [
-            'id' => $pokes['id'],
-            'nome' => ucfirst($pokes['name']),
-            'tipo' => ucfirst($pokes['types'][0]['type']['name']),
-            'vida' => $pokes['stats'][0]['base_stat'],
-            'ataque' => $pokes['stats'][1]['base_stat'],
-            'defesa' => $pokes['stats'][2]['base_stat'],
-            'velocidade' => $pokes['stats'][5]['base_stat'],
-            'peso' => $pokes['weight'] / 10,
-            'altura' => $pokes['height'] / 10.0,
-            'descricao' => $pokesDescricao,
-        ];
+        if (!$poke_param) {
+            return response()->json(['message' => 'Pokemon não encontrado'], 404);
+        }
 
-        return response()->json($detalhes);
+        return response()->json($poke_param);
     }
 }

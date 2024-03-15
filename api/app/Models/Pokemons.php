@@ -19,5 +19,10 @@ class Pokemons extends Model
         'poke_peso',
         'poke_descricao',
         'poke_procurado',
+        'poke_tipo',
+        'poke_vida',
+        'poke_ataque',
+        'poke_defesa',
+        'poke_velocidade'
     ];
 }

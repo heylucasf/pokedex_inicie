@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::prefix('pokedex')->group(function () {
+    Route::get('', [\App\Http\Controllers\PokedexController::class, 'index']);
+    Route::get('maisProcurados', [\App\Http\Controllers\PokedexController::class, 'maisProcurados']);
+    Route::get('procuraPoke/{poke}', [\App\Http\Controllers\PokedexController::class, 'procuraPoke']);
+    Route::get('{param}', [\App\Http\Controllers\PokedexController::class, 'show']);
 });
-
-Route::get('pokedex', [\App\Http\Controllers\PokedexController::class, 'index']);
-Route::get('pokedex/maisProcurados', [\App\Http\Controllers\PokedexController::class, 'maisProcurados']);
-
-Route::get('pokedex/procuraPoke/{poke}', [\App\Http\Controllers\PokedexController::class, 'procuraPoke']);
-Route::get('pokedex/{id}', [\App\Http\Controllers\PokedexController::class, 'show']);

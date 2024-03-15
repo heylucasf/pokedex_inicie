@@ -15,8 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('poke_id');
             $table->string('poke_nome');
-            $table->integer('poke_peso');
-            $table->string('poke_altura');
+            $table->string('poke_peso');
+            $table->integer('poke_altura');
+            $table->string('poke_tipo');
+            $table->integer('poke_vida');
+            $table->integer('poke_ataque');
+            $table->integer('poke_defesa');
+            $table->integer('poke_velocidade');
             $table->string('poke_descricao');
             $table->integer('poke_procurado');
         });
