@@ -41,6 +41,11 @@ class PokedexController extends Controller {
      *                  @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
      *                  @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
      *                  @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *                  @OA\Property(property="poke_tipo", type="string", example="Grass"),
+     *                  @OA\Property(property="poke_vida", type="integer", example="45"),
+     *                  @OA\Property(property="poke_ataque", type="integer", example="49"),
+     *                  @OA\Property(property="poke_velocidade", type="integer", example="45"),
+     *                  @OA\Property(property="poke_defesa", type="integer", example="49"),
      *                  @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
      *                  @OA\Property(property="poke_procurado", type="integer", example="0")
      *              )
@@ -113,8 +118,13 @@ class PokedexController extends Controller {
      *              @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
      *              @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
      *              @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *              @OA\Property(property="poke_tipo", type="string", example="Grass"),
+     *              @OA\Property(property="poke_vida", type="integer", example="45"),
+     *              @OA\Property(property="poke_ataque", type="integer", example="49"),
+     *              @OA\Property(property="poke_velocidade", type="integer", example="45"),
+     *              @OA\Property(property="poke_defesa", type="integer", example="49"),
      *              @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
-     *              @OA\Property(property="poke_procurado", type="integer", example="10")
+     *              @OA\Property(property="poke_procurado", type="integer", example="0")
      *          )
      *      ),
      *      @OA\Response(
@@ -139,33 +149,38 @@ class PokedexController extends Controller {
 
     /**
      * @OA\Get(
-     *      path="/api/pokedex/maisProcurados",
-     *      operationId="obtemPokemonsMaisProcurados",
-     *      tags={"Pokemons"},
-     *      summary="Top 10 Pokemons mais procurados",
-     *      description="Retorna uma lista dos 10 Pokemons mais procurados.",
-     *      @OA\Response(
-     *          response=200,
-     *          description="sucesso",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(
-     *                  @OA\Property(property="poke_id", type="integer", example="1"),
-     *                  @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
-     *                  @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
-     *                  @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
-     *                  @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
-     *                  @OA\Property(property="poke_procurado", type="integer", example="100")
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Nenhum Pokemon encontrado",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Nenhum Pokemon encontrado")
-     *          )
-     *      )
+     *     path="/api/pokedex/maisProcurados",
+     *     operationId="obtemPokemonsMaisProcurados",
+     *     tags={"Pokemons"},
+     *     summary="Retorna os 10 Pokemons mais procurados",
+     *     description="Retorna uma lista dos 10 Pokemons mais procurados.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="sucesso",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *              @OA\Property(property="poke_id", type="integer", example="1"),
+     *              @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
+     *              @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
+     *              @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *              @OA\Property(property="poke_tipo", type="string", example="Grass"),
+     *              @OA\Property(property="poke_vida", type="integer", example="45"),
+     *              @OA\Property(property="poke_ataque", type="integer", example="49"),
+     *              @OA\Property(property="poke_velocidade", type="integer", example="45"),
+     *              @OA\Property(property="poke_defesa", type="integer", example="49"),
+     *              @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
+     *              @OA\Property(property="poke_procurado", type="integer", example="0")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Não há nenhum Pokemon no TOP 10",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Não há nenhum Pokemon no TOP 10")
+     *         )
+     *     )
      * )
      */
     public function maisProcurados() {
@@ -174,54 +189,53 @@ class PokedexController extends Controller {
             ->take(10)
             ->get();
 
-        if($pokes) {
+        if(!$pokes->isEmpty()) {
             return response()->json($pokes);
         } else {
             return response()->json(['message' => 'Não há nenhum Pokemon no TOP 10'], 204);
         }
-
     }
 
     /**
      * @OA\Get(
-     *      path="/api/pokedex/{id}",
-     *      operationId="getPokemonDetails",
-     *      tags={"Pokemons"},
-     *      summary="Detalhes do Pokemon",
-     *      description="Retorna os detalhes do Pokemon",
-     *      @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="ID do Pokemon",
-     *          @OA\Schema(
-     *              type="integer",
-     *              format="int64"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="sucesso",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="id", type="integer", example="1"),
-     *              @OA\Property(property="nome", type="string", example="Bulbasaur"),
-     *              @OA\Property(property="tipo", type="string", example="Grass"),
-     *              @OA\Property(property="vida", type="integer", example="45"),
-     *              @OA\Property(property="ataque", type="integer", example="49"),
-     *              @OA\Property(property="defesa", type="integer", example="49"),
-     *              @OA\Property(property="velocidade", type="integer", example="45"),
-     *              @OA\Property(property="peso", type="number", format="float", example="6.9"),
-     *              @OA\Property(property="altura", type="number", format="float", example="0.7"),
-     *              @OA\Property(property="descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.")
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=404,
-     *          description="Pokémon não encontrado",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="Pokémon não encontrado")
-     *          )
-     *      )
+     *     path="/api/pokedex/{param}",
+     *     operationId="obtemPokemon",
+     *     tags={"Pokemons"},
+     *     summary="Retorna detalhes do Pokemon",
+     *     description="Retorna as informações de um Pokemon passando o nome ou ID",
+     *     @OA\Parameter(
+     *         name="param",
+     *         in="path",
+     *         description="ID ou nome do Pokemon",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="sucesso",
+     *         @OA\JsonContent(
+     *              @OA\Property(property="poke_id", type="integer", example="1"),
+     *              @OA\Property(property="poke_nome", type="string", example="Bulbasaur"),
+     *              @OA\Property(property="poke_peso", type="number", format="float", example="6.9"),
+     *              @OA\Property(property="poke_altura", type="number", format="float", example="0.7"),
+     *              @OA\Property(property="poke_tipo", type="string", example="Grass"),
+     *              @OA\Property(property="poke_vida", type="integer", example="45"),
+     *              @OA\Property(property="poke_ataque", type="integer", example="49"),
+     *              @OA\Property(property="poke_velocidade", type="integer", example="45"),
+     *              @OA\Property(property="poke_defesa", type="integer", example="49"),
+     *              @OA\Property(property="poke_descricao", type="string", example="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."),
+     *              @OA\Property(property="poke_procurado", type="integer", example="0")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Pokemon não encontrado",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Pokemon não encontrado")
+     *         )
+     *     )
      * )
      */
     public function show($param){

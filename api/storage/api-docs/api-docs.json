@@ -41,6 +41,26 @@
                                                 "format": "float",
                                                 "example": "0.7"
                                             },
+                                            "poke_tipo": {
+                                                "type": "string",
+                                                "example": "Grass"
+                                            },
+                                            "poke_vida": {
+                                                "type": "integer",
+                                                "example": "45"
+                                            },
+                                            "poke_ataque": {
+                                                "type": "integer",
+                                                "example": "49"
+                                            },
+                                            "poke_velocidade": {
+                                                "type": "integer",
+                                                "example": "45"
+                                            },
+                                            "poke_defesa": {
+                                                "type": "integer",
+                                                "example": "49"
+                                            },
                                             "poke_descricao": {
                                                 "type": "string",
                                                 "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
@@ -119,13 +139,33 @@
                                             "format": "float",
                                             "example": "0.7"
                                         },
+                                        "poke_tipo": {
+                                            "type": "string",
+                                            "example": "Grass"
+                                        },
+                                        "poke_vida": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "poke_ataque": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
+                                        "poke_velocidade": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "poke_defesa": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
                                         "poke_descricao": {
                                             "type": "string",
                                             "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
                                         },
                                         "poke_procurado": {
                                             "type": "integer",
-                                            "example": "10"
+                                            "example": "0"
                                         }
                                     },
                                     "type": "object"
@@ -157,7 +197,7 @@
                 "tags": [
                     "Pokemons"
                 ],
-                "summary": "Top 10 Pokemons mais procurados",
+                "summary": "Retorna os 10 Pokemons mais procurados",
                 "description": "Retorna uma lista dos 10 Pokemons mais procurados.",
                 "operationId": "obtemPokemonsMaisProcurados",
                 "responses": {
@@ -187,13 +227,33 @@
                                                 "format": "float",
                                                 "example": "0.7"
                                             },
+                                            "poke_tipo": {
+                                                "type": "string",
+                                                "example": "Grass"
+                                            },
+                                            "poke_vida": {
+                                                "type": "integer",
+                                                "example": "45"
+                                            },
+                                            "poke_ataque": {
+                                                "type": "integer",
+                                                "example": "49"
+                                            },
+                                            "poke_velocidade": {
+                                                "type": "integer",
+                                                "example": "45"
+                                            },
+                                            "poke_defesa": {
+                                                "type": "integer",
+                                                "example": "49"
+                                            },
                                             "poke_descricao": {
                                                 "type": "string",
                                                 "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
                                             },
                                             "poke_procurado": {
                                                 "type": "integer",
-                                                "example": "100"
+                                                "example": "0"
                                             }
                                         },
                                         "type": "object"
@@ -202,15 +262,15 @@
                             }
                         }
                     },
-                    "404": {
-                        "description": "Nenhum Pokemon encontrado",
+                    "204": {
+                        "description": "Não há nenhum Pokemon no TOP 10",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Nenhum Pokemon encontrado"
+                                            "example": "Não há nenhum Pokemon no TOP 10"
                                         }
                                     },
                                     "type": "object"
@@ -221,23 +281,22 @@
                 }
             }
         },
-        "/api/pokedex/{id}": {
+        "/api/pokedex/{param}": {
             "get": {
                 "tags": [
                     "Pokemons"
                 ],
-                "summary": "Detalhes do Pokemon",
-                "description": "Retorna os detalhes do Pokemon",
-                "operationId": "getPokemonDetails",
+                "summary": "Retorna detalhes do Pokemon",
+                "description": "Retorna as informações de um Pokemon passando o nome ou ID",
+                "operationId": "obtemPokemon",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "param",
                         "in": "path",
-                        "description": "ID do Pokemon",
+                        "description": "ID ou nome do Pokemon",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string"
                         }
                     }
                 ],
@@ -248,47 +307,51 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "id": {
+                                        "poke_id": {
                                             "type": "integer",
                                             "example": "1"
                                         },
-                                        "nome": {
+                                        "poke_nome": {
                                             "type": "string",
                                             "example": "Bulbasaur"
                                         },
-                                        "tipo": {
-                                            "type": "string",
-                                            "example": "Grass"
-                                        },
-                                        "vida": {
-                                            "type": "integer",
-                                            "example": "45"
-                                        },
-                                        "ataque": {
-                                            "type": "integer",
-                                            "example": "49"
-                                        },
-                                        "defesa": {
-                                            "type": "integer",
-                                            "example": "49"
-                                        },
-                                        "velocidade": {
-                                            "type": "integer",
-                                            "example": "45"
-                                        },
-                                        "peso": {
+                                        "poke_peso": {
                                             "type": "number",
                                             "format": "float",
                                             "example": "6.9"
                                         },
-                                        "altura": {
+                                        "poke_altura": {
                                             "type": "number",
                                             "format": "float",
                                             "example": "0.7"
                                         },
-                                        "descricao": {
+                                        "poke_tipo": {
+                                            "type": "string",
+                                            "example": "Grass"
+                                        },
+                                        "poke_vida": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "poke_ataque": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
+                                        "poke_velocidade": {
+                                            "type": "integer",
+                                            "example": "45"
+                                        },
+                                        "poke_defesa": {
+                                            "type": "integer",
+                                            "example": "49"
+                                        },
+                                        "poke_descricao": {
                                             "type": "string",
                                             "example": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
+                                        },
+                                        "poke_procurado": {
+                                            "type": "integer",
+                                            "example": "0"
                                         }
                                     },
                                     "type": "object"
@@ -297,14 +360,14 @@
                         }
                     },
                     "404": {
-                        "description": "Pokémon não encontrado",
+                        "description": "Pokemon não encontrado",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Pokémon não encontrado"
+                                            "example": "Pokemon não encontrado"
                                         }
                                     },
                                     "type": "object"
