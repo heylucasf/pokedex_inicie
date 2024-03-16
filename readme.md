@@ -2,38 +2,40 @@
 
 # Sobre o Projeto
 
-O projeto é uma Pokedex e foi construido para um teste prático na Inicie.
+O projeto é uma Pokedex que foi construido com o intúito para um teste prático na Inicie.
 O projeto foi contruido em Angular 17, Laravel 10, MySql e Docker.
 
 # Sobre a API
-**API criada para teste na Inicie**
+**API criada para o teste na Inicie**
 
 A API tem finalidade de executar operações e obter dados requisitados pelo cliente. 
 
-A API também contém conta com documentação do Swagger.
-Para entrar no Swagger basta subir a aplicação (que será falado logo abaixo na sessão do Docker) e entrar no endpoint ```api/doc```
+A API também contém com documentação do Swagger.
+Para entrar no Swagger basta subir a aplicação (que será explicado logo abaixo na sessão do Docker) e entrar no endpoint ```api/doc```
 
 A finalidade da API é retornar dados da API pokeapi.co, obter os dados requisitados, armazenar apenas o necessário e disponibilizar para o SPA (front-end em Angular)
 
 
 ## Sobre o SPA
-**SPA criado para teste na Inicie**
+**SPA criado para o teste na Inicie**
 
 A SPA foi contruido em Angular 17. Ele tem a finalidade de absorver os dados da API e montar uma Pokedex com as informações.
 
 ## Docker - Estruturação do projeto
 
 O projeto está separado em ```API```, ```SPA``` e ```NGINX```. Cada um está independente, exceto o SPA que depende do NGINX para executar. 
-Ao executar o ```docker compose``` todos sobem sequencialmente planejados.
+Ao executar o ```docker-compose``` todos sobem sequencialmente planejados.
 
-A estrutura conta com as imagens da Api, Spa, MySQL, phpMyAdmin e Nginx.
+A estrutura conta com as imagens da Api, Spa, MySQL, phpMyAdmin e Nginx. 
+
+Existe um volume que é compartilhado entre o SPA e Nginx.
 
 A Spa como é dependente Nginx, ela cria um volume obtido pelo Dist gerado pelo Angular. O Nginx obtem esse volume e executa a Spa. O container da Spa nunca irá subir, apenas a imagem.
 
 ## Docker - Como executar
 
 Para executar o projeto basta ter o [Docker](https://docs.docker.com/get-docker/) instalado na sua máquina.
-Após ter o Docker, clone o projeto pelo respositório [GIT](https://github.com/heylucasf/pokedex_inicie) e coloque em uma pasta da sua escolha.
+Após ter o Docker, clone o projeto pelo respositório [GIT](https://github.com/heylucasf/pokedex_inicie) e coloque-o em uma pasta da sua escolha.
 
 Antes de executar o projeto, altere o os parâmetros de Banco do ```.env``` da ```API```
 > ```DB_HOST=mysql``` // Pega o container onde está o banco de dados
@@ -48,10 +50,10 @@ Antes de executar o projeto, altere o os parâmetros de Banco do ```.env``` da `
 Depois de clonado abra algum terminal que execute o Docker, entre no local raiz do projeto clonado e execute os comandos:
 > ```docker compose up -d``` //Cria as imagens e sobe os containers em segundo plano
 >
-> ```docker compose exec api php artisan migrate``` // Vai pedir para criar o Banco de dados Pokemons. Dê sim, com isso ele cria o banco. Caso de erro espere um pouco e tente novamente.
+> ```docker compose exec api php artisan migrate``` // Executa o Migrate do Banco de dados. Vai pedir para criar o Banco de dados Pokemons. Dê sim, com isso ele cria o banco. Caso de erro espere um pouco e tente novamente.
 >
 
-Depois do Banco de dados criado voce já tem acesso a aplicação nos links abaixo:
+Depois do Banco de dados criado e o docker executado voce já tem acesso a aplicação nos links abaixo:
 > ```localhost``` //Rota Padrao
 >
 > ```localhost:8000/api/pokedex``` // Rota da listagem de Pokemons na API
