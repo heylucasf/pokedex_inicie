@@ -268,9 +268,9 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "": {
                                             "type": "string",
-                                            "example": "Não há nenhum Pokemon no TOP 10"
+                                            "example": "[]"
                                         }
                                     },
                                     "type": "object"

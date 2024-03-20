@@ -178,7 +178,7 @@ class PokedexController extends Controller {
      *         response=204,
      *         description="Não há nenhum Pokemon no TOP 10",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Não há nenhum Pokemon no TOP 10")
+     *             @OA\Property(type="string", example="[]")
      *         )
      *     )
      * )
@@ -192,7 +192,7 @@ class PokedexController extends Controller {
         if(!$pokes->isEmpty()) {
             return response()->json($pokes);
         } else {
-            return response()->json(['message' => 'Não há nenhum Pokemon no TOP 10'], 204);
+            return response()->json([]);
         }
     }
 
