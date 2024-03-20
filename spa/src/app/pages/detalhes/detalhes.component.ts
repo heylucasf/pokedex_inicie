@@ -16,7 +16,7 @@ import { LoaderComponent } from "../../componentes/loader/loader.component";
 export class DetalhesComponent implements OnInit{
 
   pokemon: any[] = [];
-  idPoke = 0;
+  idPoke!: number;
   nomePoke = '';
   descPoke = '';
   ataquePoke = '';
